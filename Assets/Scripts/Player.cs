@@ -3,30 +3,51 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] float speed = 1.5f; // プレイヤーの速度
-    //[SerializeField] Animator animator; // animator入れ
+    [SerializeField] Rigidbody2D rb; //rigidbody入れ 
+    [SerializeField] Animator animator; // animator入れ
+    [SerializeField] SpriteRenderer spriteRenderer;
 
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
     private void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
+        float x = 0;
+        float y = 0;
         if(Input.GetKey(KeyCode.W))
         {
-            transform.position += Vector3.up*speed*Time.deltaTime;
+            y = 1;
         }
         if(Input.GetKey(KeyCode.A))
         {
-            transform.position += Vector3.left*speed*Time.deltaTime;
+            x = -1;
+            animator.run = true;
         }
         if(Input.GetKey(KeyCode.S))
         {
-            transform.position += Vector3.down*speed*Time.deltaTime;
+            y = -1;
         }
         if(Input.GetKey(KeyCode.D))
         {
-            transform.position += Vector3.right*speed*Time.deltaTime;
+            x = 1;
         }
+        if(x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        if(x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        rb.linearVelocity=new Vector2(x,y)*speed;
     }
+    
 
 }
