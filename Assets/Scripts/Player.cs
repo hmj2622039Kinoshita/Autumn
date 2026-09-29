@@ -28,7 +28,6 @@ public class Player : MonoBehaviour
         if(Input.GetKey(KeyCode.A))
         {
             x = -1;
-            animator.run = true;
         }
         if(Input.GetKey(KeyCode.S))
         {
@@ -47,6 +46,7 @@ public class Player : MonoBehaviour
             spriteRenderer.flipX = true;
         }
         rb.linearVelocity=new Vector2(x,y)*speed;
+        animator.SetBool("run", x != 0 || y != 0);
     }
     
 
