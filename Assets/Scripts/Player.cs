@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -21,19 +22,19 @@ public class Player : MonoBehaviour
     {
         float x = 0;
         float y = 0;
-        if(Input.GetKey(KeyCode.W))
+        if(Keyboard.current.wKey.wasPressedThisFrame)
         {
             y = 1;
         }
-        if(Input.GetKey(KeyCode.A))
+        if(Keyboard.current.aKey.wasPressedThisFrame)
         {
             x = -1;
         }
-        if(Input.GetKey(KeyCode.S))
+        if(Keyboard.current.sKey.wasPressedThisFrame)
         {
             y = -1;
         }
-        if(Input.GetKey(KeyCode.D))
+        if(Keyboard.current.dKey.wasPressedThisFrame)
         {
             x = 1;
         }
